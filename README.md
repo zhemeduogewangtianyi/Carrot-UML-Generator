@@ -40,3 +40,6 @@ jar 包使用方法：
 
 
 
+当前项目结构：
+
+![](https://github.com/zhemeduogewangtianyi/Carrot-UML-Generator/blob/main/src/main/resources/images/carrotUml.png?raw=true)
