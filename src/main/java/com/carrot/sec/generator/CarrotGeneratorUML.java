@@ -18,6 +18,11 @@ public class CarrotGeneratorUML {
         StringBuilder ret = new StringBuilder();
         ret.append("@startuml").append("\n");
         ret.append("skinparam classAttributeIconSize 0\n");
+        ret.append("' Split 2nto 4 pages\n");
+        ret.append("page 2x4\n");
+        ret.append("skinparam pageMargin 10\n");
+        ret.append("skinparam pageExternalColor gray\n");
+        ret.append("skinparam pageBorderColor black\n");
 
         for(CarrotUMLContext c : contexts){
 
