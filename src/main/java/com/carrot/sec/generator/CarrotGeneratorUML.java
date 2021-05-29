@@ -6,7 +6,6 @@ import net.sourceforge.plantuml.SourceStringReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -41,12 +40,15 @@ public class CarrotGeneratorUML {
 
             if(parentClass != null && parentClass.size() > 0){
                 generatorClass(className,parentClass,ret,c);
+
             }else if(interfaceNames != null && interfaceNames.size() > 0){
                 generatorInterface(className,interfaceNames,ret,c);
+
             }else{
                 ret.append(className).append("{").append("\n");
                 generatorField(c,ret);
                 generatorMethod(c,ret);
+
                 ret.append("}").append("\n\n");
             }
 
@@ -66,11 +68,25 @@ public class CarrotGeneratorUML {
                     ret.append(className).append(" extends ");
                 }
                 ret.append(parentClass.get(i));
+
                 this.generatorCodeBlock(ret, c, i, parentClass.size());
             }
 
         }else{
             ret.append(className).append(" extends ").append(parentClass.get(0)).append("{").append("\n");
+            generatorField(c,ret);
+            generatorMethod(c,ret);
+
+            ret.append("}").append("\n");
+        }
+    }
+
+    private void generatorCodeBlock(StringBuilder ret, CarrotUMLContext c, int i, int size) {
+        if(i < size - 1){
+            ret.append(",");
+        }else{
+            ret.append("{").append("\n");
+
             generatorField(c,ret);
             generatorMethod(c,ret);
 
@@ -85,22 +101,11 @@ public class CarrotGeneratorUML {
                 ret.append(className).append(" implements ");
             }
             ret.append(interfaceName);
+
             this.generatorCodeBlock(ret, c, cnt, interfaceNames.size());
+
             cnt++;
         }
-    }
-
-    private void generatorCodeBlock(StringBuilder ret, CarrotUMLContext c, int i, int size) {
-        if(i < size - 1){
-            ret.append(",");
-        }else{
-            ret.append("{").append("\n");
-        }
-
-        generatorField(c,ret);
-        generatorMethod(c,ret);
-
-        ret.append("}").append("\n");
     }
 
     private void generatorField(CarrotUMLContext c,StringBuilder builder){

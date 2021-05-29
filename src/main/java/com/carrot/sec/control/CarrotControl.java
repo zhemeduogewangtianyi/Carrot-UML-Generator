@@ -32,13 +32,17 @@ public class CarrotControl {
         if(fileNames == null || fileNames.length == 0){
             return null;
         }
+        String name = null;
         for (File file : fileNames) {
+            name = file.getName();
             if(file.isDirectory()){
                 this.readClass(file.getAbsolutePath(),list);
             }
             try {
-                if (file.getName().endsWith("java")) {
-
+                if (file.getName().endsWith(".java")) {
+                    if(file.isDirectory()){
+                        this.readClass(file.getAbsolutePath(),list);
+                    }
                     FILES.add(file.getName().split("\\.")[0]);
                     FileInputStream in = new FileInputStream(file.getAbsolutePath());
                     CarrotUMLContext context = new CarrotUMLContext();
@@ -49,6 +53,7 @@ public class CarrotControl {
                     System.out.println();
                 }
             } catch (FileNotFoundException e) {
+                System.out.println(name);
                 e.printStackTrace();
             }
         }
