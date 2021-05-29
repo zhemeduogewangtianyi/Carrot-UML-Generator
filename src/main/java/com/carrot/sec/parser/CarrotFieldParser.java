@@ -10,6 +10,7 @@ import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.AnnotationExpr;
 
 public class CarrotFieldParser implements CarrotParser<FieldDeclaration> {
+
     @Override
     public void parser(FieldDeclaration type, CarrotUMLContext context) {
         NodeList<Modifier> modifiers = type.getModifiers();

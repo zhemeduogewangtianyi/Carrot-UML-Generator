@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Getter
 public class CarrotUMLContext {
 
-    private AtomicInteger ctl = new AtomicInteger(0);
+    private final AtomicInteger ctl = new AtomicInteger(0);
 
     /** 类名称 */
     @Setter

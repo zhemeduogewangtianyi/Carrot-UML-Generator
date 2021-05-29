@@ -4,7 +4,6 @@ import com.carrot.sec.context.CarrotUMLContext;
 import net.sourceforge.plantuml.SourceStringReader;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
@@ -17,7 +16,6 @@ public class CarrotGeneratorUML {
         StringBuilder ret = new StringBuilder();
         ret.append("@startuml").append("\n");
         ret.append("skinparam classAttributeIconSize 0\n");
-
 
         for(CarrotUMLContext c : contexts){
 
@@ -35,7 +33,6 @@ public class CarrotGeneratorUML {
                     ret.append("class ");
                 }
             }
-
 
             if(parentClass != null && parentClass.size() > 0){
                 //interface N extends
@@ -55,7 +52,6 @@ public class CarrotGeneratorUML {
                         generatorMethod(c,ret);
 
                         ret.append("}").append("\n");
-
                     }
 
                 }else{
@@ -73,7 +69,6 @@ public class CarrotGeneratorUML {
 
                 ret.append("}").append("\n\n");
             }
-
 
         }
 

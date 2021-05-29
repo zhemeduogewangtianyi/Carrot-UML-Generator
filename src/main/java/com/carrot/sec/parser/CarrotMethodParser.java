@@ -16,7 +16,6 @@ public class CarrotMethodParser implements CarrotParser<MethodDeclaration> {
     @Override
     public void parser(MethodDeclaration type, CarrotUMLContext context) {
 
-
         String methodReturnType = type.getType().asString();
         String methodName = type.getName().asString();
         NodeList<Parameter> parameters = type.getParameters();
