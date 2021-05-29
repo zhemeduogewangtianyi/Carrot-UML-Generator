@@ -10,7 +10,8 @@ public class CarrotAnnotationExprParser implements CarrotParser<AnnotationExpr> 
 
     @Override
     public void parser(AnnotationExpr type, CarrotUMLContext context) {
-        System.out.println("注解：" + type.getName().asString());
+        //TODO
+        System.out.println("annotation：" + type.getName().asString());
     }
 
     @Override

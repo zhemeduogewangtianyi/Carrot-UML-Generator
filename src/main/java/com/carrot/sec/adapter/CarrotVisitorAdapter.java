@@ -21,8 +21,7 @@ public class CarrotVisitorAdapter extends VoidVisitorAdapter<Object> {
 
             CarrotParser carrot = CarrotDispatchCenter.findCarrot(type);
             if(carrot == null){
-                System.out.println("无匹配结果");
-                return;
+                throw new RuntimeException("error type !");
             }
             carrot.parser(type,context);
         }

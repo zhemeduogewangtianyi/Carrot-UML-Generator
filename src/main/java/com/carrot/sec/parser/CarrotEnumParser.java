@@ -4,7 +4,6 @@ import com.carrot.sec.annotations.CarrotFind;
 import com.carrot.sec.context.CarrotUMLContext;
 import com.carrot.sec.dispatch.CarrotDispatchCenter;
 import com.carrot.sec.interfaces.CarrotParser;
-import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.BodyDeclaration;
 import com.github.javaparser.ast.body.EnumConstantDeclaration;
@@ -20,7 +19,7 @@ public class CarrotEnumParser implements CarrotParser<TypeDeclaration<?>> {
         String enumName = type.getName().asString();
 
         context.setClassName(enumName);
-        System.out.println("枚举名称：" + enumName);
+        context.setEnum(true);
 
         NodeList<EnumConstantDeclaration> entries = ((EnumDeclaration) type).getEntries();
 
@@ -28,7 +27,9 @@ public class CarrotEnumParser implements CarrotParser<TypeDeclaration<?>> {
             EnumConstantDeclaration enumConstantDeclaration = entries.get(i);
             SimpleName enumConstantDeclarationName = enumConstantDeclaration.getName();
 
-            System.out.println("枚举" + enumConstantDeclarationName.asString());
+            //enum cost
+            context.getFieldName().add(enumConstantDeclarationName.asString());
+
         }
 
         NodeList<BodyDeclaration<?>> members = type.getMembers();

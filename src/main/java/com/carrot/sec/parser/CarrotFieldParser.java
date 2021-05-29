@@ -6,11 +6,8 @@ import com.carrot.sec.interfaces.CarrotParser;
 import com.github.javaparser.ast.Modifier;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.FieldDeclaration;
-import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.AnnotationExpr;
-import com.github.javaparser.ast.expr.SimpleName;
-import com.github.javaparser.ast.type.Type;
 
 public class CarrotFieldParser implements CarrotParser<FieldDeclaration> {
     @Override
@@ -36,6 +33,7 @@ public class CarrotFieldParser implements CarrotParser<FieldDeclaration> {
 
         }
 
+        //fieldModifier fieldType fieldName
         for(int i = 0 ; modifiers != null && i < modifiers.size() ; i++){
             Modifier modifier = modifiers.get(i);
             String modifierKeyword = modifier.getKeyword().asString();
@@ -68,8 +66,6 @@ public class CarrotFieldParser implements CarrotParser<FieldDeclaration> {
                 context.getInnerClass().getLast().getFieldName().add(builderField.toString());
             }
 
-
-            System.out.println("字段：权限：" + modifierKeyword + " 类型：" + fieldType + " 名字：" + fieldName);
         }
         NodeList<AnnotationExpr> annotations = type.getAnnotations();
         for(AnnotationExpr annotationExpr : annotations){

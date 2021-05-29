@@ -19,7 +19,7 @@ public class CarrotClassOrInterfaceParser implements CarrotParser<TypeDeclaratio
     public void parser(TypeDeclaration<?> type, CarrotUMLContext context) {
         String className = type.getName().asString();
 
-        //类名称
+        //class name
         if(!context.isInner()){
             context.setClassName(className);
             context.setInterface(((ClassOrInterfaceDeclaration) type).isInterface());
@@ -28,15 +28,13 @@ public class CarrotClassOrInterfaceParser implements CarrotParser<TypeDeclaratio
             context.getInnerClass().getLast().setInterface(((ClassOrInterfaceDeclaration) type).isInterface());
         }
 
-        System.out.println("类名称：" + className);
-
         NodeList<AnnotationExpr> annotations = type.getAnnotations();
         if(annotations != null){
             for(AnnotationExpr annotationExpr : annotations){
                 Name annotationName = annotationExpr.getName();
 
                 //TODO
-                System.out.println("类上面的注解：" + annotationName);
+                System.out.println("on class annotation：" + annotationName);
 
             }
         }
@@ -45,14 +43,12 @@ public class CarrotClassOrInterfaceParser implements CarrotParser<TypeDeclaratio
         if(extendedTypes != null){
             for(ClassOrInterfaceType extendClass : extendedTypes){
                 String extendedType = extendClass.getName().asString();
-                //父类
+                //parent class
                 if(!context.isInner()){
                     context.getParentClass().add(extendedType);
                 }else{
                     context.getInnerClass().getLast().getParentClass().add(extendedType);
                 }
-
-                System.out.println("继承了 ： " + extendedType);
 
             }
         }
@@ -62,14 +58,13 @@ public class CarrotClassOrInterfaceParser implements CarrotParser<TypeDeclaratio
             for(ClassOrInterfaceType interfaceType : implementedTypes){
                 String interfaceTypeName = interfaceType.getName().asString();
 
-                //接口
+                //interface
                 if(!context.isInner()){
                     context.getInterfaceName().add(interfaceTypeName);
                 }else{
                     context.getInnerClass().getLast().getInterfaceName().add(interfaceTypeName);
                 }
 
-                System.out.println("实现了：" + interfaceTypeName);
             }
         }
 
@@ -79,7 +74,7 @@ public class CarrotClassOrInterfaceParser implements CarrotParser<TypeDeclaratio
                 SimpleName typeParameterName = typeParameter.getName();
 
                 //TODO
-                System.out.println("泛型是：" + typeParameterName);
+                System.out.println("generic paradigm is ：" + typeParameterName);
             }
         }
 

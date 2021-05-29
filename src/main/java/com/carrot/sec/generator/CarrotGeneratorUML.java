@@ -29,6 +29,8 @@ public class CarrotGeneratorUML {
             if(!c.isAnnotation()){
                 if(c.isInterface()){
                     ret.append("interface ");
+                }else if(c.isEnum()){
+                    ret.append("enum ");
                 }else{
                     ret.append("class ");
                 }

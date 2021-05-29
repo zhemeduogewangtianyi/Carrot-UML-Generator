@@ -7,12 +7,9 @@ import com.github.javaparser.ast.Modifier;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.Parameter;
-import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.expr.SimpleName;
 import com.github.javaparser.ast.type.Type;
-
-import java.util.Optional;
 
 public class CarrotMethodParser implements CarrotParser<MethodDeclaration> {
 
@@ -35,8 +32,8 @@ public class CarrotMethodParser implements CarrotParser<MethodDeclaration> {
             Type parameterType = parameter.getType();
             SimpleName parameterName = parameter.getName();
 
-            //TODO
-            System.out.println("参数类型：" + parameterType.asString() + " 参数名字：" + parameterName);
+            //TODO paramType paramName
+            System.out.println("paramType：" + parameterType.asString() + " paramName：" + parameterName);
         }
 
         NodeList<AnnotationExpr> annotations = type.getAnnotations();
@@ -50,9 +47,11 @@ public class CarrotMethodParser implements CarrotParser<MethodDeclaration> {
         NodeList<Modifier> modifiers = type.getModifiers();
 
         StringBuilder builderMethod = new StringBuilder();
+
         if(modifiers.size() == 0){
             builderMethod.append("~ ");
         }
+        //methodModifier methodReturnType methodName
         a:for(int i = 0 ; modifiers != null && i < modifiers.size() ; i++){
             switch (modifiers.get(i).toString().trim()){
                 case "public":
@@ -79,9 +78,6 @@ public class CarrotMethodParser implements CarrotParser<MethodDeclaration> {
         }else{
             context.getInnerClass().getLast().getMethodNames().add(builderMethod.toString());
         }
-
-        System.out.println("修饰符：" + builderMethod.toString() + " 返回类型：" + methodReturnType + " 方法名：" + methodName);
-
 
     }
 

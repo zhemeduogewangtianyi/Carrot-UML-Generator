@@ -24,6 +24,9 @@ public class CarrotUMLContext {
     @Setter
     private boolean isAnnotation;
 
+    @Setter
+    private boolean isEnum;
+
     /** 父类们 */
     private final List<String> parentClass = new ArrayList<>();
 

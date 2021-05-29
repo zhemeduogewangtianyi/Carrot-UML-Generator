@@ -23,7 +23,7 @@ public class CarrotAnnotationParser implements CarrotParser<TypeDeclaration<?>> 
         }
         context.setClassName("annotation " + type.getName().asString());
         context.setAnnotation(true);
-        System.out.println("注解：" + type.getName().asString());
+        //TODO content
     }
 
     @Override
