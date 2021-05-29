@@ -2,6 +2,7 @@ package com.carrot.sec.generator;
 
 import com.carrot.sec.context.CarrotUMLContext;
 import net.sourceforge.plantuml.SourceStringReader;
+import net.sourceforge.plantuml.core.DiagramDescription;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -129,7 +130,8 @@ public class CarrotGeneratorUML {
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(new File(folder));
-            reader.generateImage(fos);
+            reader.outputImage(fos);
+
         }catch (IOException e) {
             e.printStackTrace();
         }finally {
