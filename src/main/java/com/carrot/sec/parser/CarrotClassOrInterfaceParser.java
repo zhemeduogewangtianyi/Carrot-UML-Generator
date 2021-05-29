@@ -107,7 +107,12 @@ public class CarrotClassOrInterfaceParser implements CarrotParser<TypeDeclaratio
                         carrot.parser(bodyDeclaration,context);
                     }
                 }else{
-                    throw new RuntimeException("unknown type !");
+                    CarrotParser carrot = CarrotDispatchCenter.findCarrot(bodyDeclaration);
+                    if(carrot != null){
+                        carrot.parser(bodyDeclaration,context);
+                    }else{
+                        throw new RuntimeException("unknown type !");
+                    }
                 }
 
                 membersCnt++;

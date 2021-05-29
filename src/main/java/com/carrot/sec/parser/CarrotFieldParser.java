@@ -20,54 +20,57 @@ public class CarrotFieldParser implements CarrotParser<FieldDeclaration> {
             for(VariableDeclarator variableDeclarator : variables){
 
                 StringBuilder builderField = new StringBuilder();
+
+                String fieldName = variableDeclarator.getName().asString();
+                String fieldType = variableDeclarator.getType().asString();
+
                 builderField.append("~ ");
-                builderField.append(variableDeclarator.getName().asString());
+                builderField.append(fieldName);
                 builderField.append(" : ");
-                builderField.append(variableDeclarator.getType().asString());
+                builderField.append(fieldType);
 
                 if(!context.isInner()){
                     context.getFieldName().add(builderField.toString());
                 }else{
                     context.getInnerClass().getLast().getFieldName().add(builderField.toString());
                 }
-            }
 
+                //fieldModifier fieldType fieldName
+                for(int i = 0 ; modifiers != null && i < modifiers.size() ; i++){
+                    Modifier modifier = modifiers.get(i);
+                    String modifierKeyword = modifier.getKeyword().asString();
+
+                    StringBuilder builderModifierKeyword = new StringBuilder();
+                    switch (modifierKeyword.trim()){
+                        case "public":
+                            builderModifierKeyword.append("+ ");
+                            break;
+                        case "protected":
+                            builderModifierKeyword.append("/# ");
+                            break;
+                        case "private":
+                            builderModifierKeyword.append("- ");
+                            break;
+                        default:
+                            builderModifierKeyword.append("~ ");
+                            break;
+                    }
+                    builderModifierKeyword.append(fieldName);
+                    builderModifierKeyword.append(" : ");
+                    builderModifierKeyword.append(fieldType);
+
+                    if(!context.isInner()){
+                        context.getFieldName().add(builderModifierKeyword.toString());
+                    }else{
+                        context.getInnerClass().getLast().getFieldName().add(builderModifierKeyword.toString());
+                    }
+
+                }
+
+            }
         }
 
-        //fieldModifier fieldType fieldName
-        for(int i = 0 ; modifiers != null && i < modifiers.size() ; i++){
-            Modifier modifier = modifiers.get(i);
-            String modifierKeyword = modifier.getKeyword().asString();
-            VariableDeclarator variableDeclarator = variables.get(i);
-            String fieldType = variableDeclarator.getType().asString();
-            String fieldName = variableDeclarator.getName().asString();
 
-            StringBuilder builderField = new StringBuilder();
-            switch (modifierKeyword.trim()){
-                case "public":
-                    builderField.append("+ ");
-                    break;
-                case "protected":
-                    builderField.append("/# ");
-                    break;
-                case "private":
-                    builderField.append("- ");
-                    break;
-                default:
-                    builderField.append("~ ");
-                    break;
-            }
-            builderField.append(fieldName);
-            builderField.append(" : ");
-            builderField.append(fieldType);
-
-            if(!context.isInner()){
-                context.getFieldName().add(builderField.toString());
-            }else{
-                context.getInnerClass().getLast().getFieldName().add(builderField.toString());
-            }
-
-        }
         NodeList<AnnotationExpr> annotations = type.getAnnotations();
         for(AnnotationExpr annotationExpr : annotations){
             CarrotParser carrot = CarrotDispatchCenter.findCarrot(annotationExpr);
