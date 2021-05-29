@@ -75,7 +75,8 @@ public class CarrotControl {
         CarrotDispatchCenter.register(new CarrotFieldParser());
         CarrotDispatchCenter.register(new CarrotMethodParser());
         CarrotDispatchCenter.register(new CarrotAnnotationExprParser());
-        CarrotDispatchCenter.register(new CarrotConstructorDeclarationParser());
+        CarrotDispatchCenter.register(new CarrotConstructorParser());
+        CarrotDispatchCenter.register(new CarrotInitializerParser());
     }
 
 }
