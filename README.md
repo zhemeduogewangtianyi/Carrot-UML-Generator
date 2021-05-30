@@ -43,3 +43,11 @@ jar 包使用方法：
 当前项目结构：
 
 ![](https://github.com/zhemeduogewangtianyi/Carrot-UML-Generator/blob/main/src/main/resources/images/carrotUml.png?raw=true)
+
+
+
+迭代变化：
+
+2021-05-30	支持分多文件生成，解决大图片展示不全问题。
+
+2021-05-29 	发布代码，修复字段变量，方法生成时候溢出问题。
