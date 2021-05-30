@@ -1,5 +1,6 @@
 package com.carrot.sec.parser;
 
+import com.carrot.sec.annotations.CarrotFind;
 import com.carrot.sec.context.CarrotUMLContext;
 import com.carrot.sec.dispatch.CarrotDispatchCenter;
 import com.carrot.sec.interfaces.CarrotParser;
@@ -9,6 +10,8 @@ import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.AnnotationExpr;
 
+@SuppressWarnings({"unchecked", "rawtypes"})
+@CarrotFind
 public class CarrotFieldParser implements CarrotParser<FieldDeclaration> {
 
     @Override

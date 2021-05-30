@@ -8,7 +8,7 @@ import com.github.javaparser.ast.body.ConstructorDeclaration;
 public class CarrotConstructorParser implements CarrotParser<BodyDeclaration<?>> {
     @Override
     public void parser(BodyDeclaration<?> type, CarrotUMLContext context) {
-        System.out.println(type);
+        //TODO i don't known ...
     }
 
     @Override

@@ -1,69 +1,75 @@
 package com.carrot.sec.generator;
 
 import com.carrot.sec.context.CarrotUMLContext;
+import com.google.common.collect.Lists;
 import net.sourceforge.plantuml.SourceStringReader;
-import net.sourceforge.plantuml.core.DiagramDescription;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 public class CarrotGeneratorUML {
 
-    private String generator;
+    public List<String> generator(List<CarrotUMLContext> contexts,int step){
 
-    public String generator(List<CarrotUMLContext> contexts){
-        StringBuilder ret = new StringBuilder();
-        ret.append("@startuml").append("\n");
-        ret.append("skinparam classAttributeIconSize 0\n");
-        ret.append("' Split 2nto 4 pages\n");
-        ret.append("page 2x4\n");
-        ret.append("skinparam pageMargin 10\n");
-        ret.append("skinparam pageExternalColor gray\n");
-        ret.append("skinparam pageBorderColor black\n");
+        final List<String> generators = new ArrayList<>();
 
-        for(CarrotUMLContext c : contexts){
+        List<List<CarrotUMLContext>> partitions = Lists.partition(contexts, step);
+        for(List<CarrotUMLContext> partition : partitions) {
 
-            String className = c.getClassName();
+            StringBuilder ret = new StringBuilder();
+            ret.append("@startuml").append("\n");
+            ret.append("skinparam classAttributeIconSize 0\n");
+            ret.append("' Split 2nto 4 pages\n");
+            ret.append("page 2x4\n");
+            ret.append("skinparam pageMargin 10\n");
+            ret.append("skinparam pageExternalColor gray\n");
+            ret.append("skinparam pageBorderColor black\n");
 
-            //Parent
-            List<String> parentClass = c.getParentClass();
+            for(CarrotUMLContext c : partition) {
 
-            //interface
-            Set<String> interfaceNames = c.getInterfaceName();
+                String className = c.getClassName();
 
-            if(!c.isAnnotation()){
-                if(c.isInterface()){
-                    ret.append("interface ");
-                }else if(c.isEnum()){
-                    ret.append("enum ");
-                }else{
-                    ret.append("class ");
+                //Parent
+                List<String> parentClass = c.getParentClass();
+
+                //interface
+                Set<String> interfaceNames = c.getInterfaceName();
+
+                if(!c.isAnnotation()){
+                    if(c.isInterface()){
+                        ret.append("interface ");
+                    }else if(c.isEnum()){
+                        ret.append("enum ");
+                    }else{
+                        ret.append("class ");
+                    }
                 }
+
+                if(parentClass != null && parentClass.size() > 0){
+                    generatorClass(className,parentClass,ret,c);
+
+                }else if(interfaceNames != null && interfaceNames.size() > 0){
+                    generatorInterface(className,interfaceNames,ret,c);
+
+                }else{
+                    ret.append(className).append("{").append("\n");
+                    generatorField(c,ret);
+                    generatorMethod(c,ret);
+
+                    ret.append("}").append("\n\n");
+                }
+
             }
 
-            if(parentClass != null && parentClass.size() > 0){
-                generatorClass(className,parentClass,ret,c);
-
-            }else if(interfaceNames != null && interfaceNames.size() > 0){
-                generatorInterface(className,interfaceNames,ret,c);
-
-            }else{
-                ret.append(className).append("{").append("\n");
-                generatorField(c,ret);
-                generatorMethod(c,ret);
-
-                ret.append("}").append("\n\n");
-            }
-
+            ret.append("@enduml");
+            generators.add(ret.toString());
         }
 
-        ret.append("@enduml");
-        String s = ret.toString();
-        this.generator = s;
-        return s;
+        return generators;
     }
 
     private void generatorClass(String className,List<String> parentClass,StringBuilder ret,CarrotUMLContext c){
@@ -128,23 +134,27 @@ public class CarrotGeneratorUML {
         }
     }
 
-    public void writer(String folder) {
+    public void writer(String folder,List<String> generators) {
 
-        SourceStringReader reader = new SourceStringReader(generator);
+        for(int i = 0 ; generators != null && i < generators.size() ; i++){
 
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(new File(folder));
-            reader.outputImage(fos);
+            SourceStringReader reader = new SourceStringReader(generators.get(i));
 
-        }catch (IOException e) {
-            e.printStackTrace();
-        }finally {
-            if(fos != null){
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+            FileOutputStream fos = null;
+            try {
+                String finalName = folder + File.separator + "carrot_uml" + "_" + i + ".png";
+                fos = new FileOutputStream(new File(finalName));
+                reader.outputImage(fos);
+
+            }catch (Exception e) {
+                e.printStackTrace();
+            }finally {
+                if(fos != null){
+                    try {
+                        fos.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }

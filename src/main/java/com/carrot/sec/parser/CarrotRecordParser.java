@@ -11,7 +11,7 @@ public class CarrotRecordParser implements CarrotParser<TypeDeclaration<?>> {
 
     @Override
     public void parser(TypeDeclaration<?> type, CarrotUMLContext context) {
-        System.out.println("no implements ..." + type.getName().asString());
+        //TODO no implements ...
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.carrot.sec.parser;
 
+import com.carrot.sec.annotations.CarrotFind;
 import com.carrot.sec.context.CarrotUMLContext;
 import com.carrot.sec.dispatch.CarrotDispatchCenter;
 import com.carrot.sec.interfaces.CarrotParser;
@@ -11,6 +12,8 @@ import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.expr.SimpleName;
 import com.github.javaparser.ast.type.Type;
 
+@SuppressWarnings({"unchecked", "rawtypes"})
+@CarrotFind
 public class CarrotMethodParser implements CarrotParser<MethodDeclaration> {
 
     @Override
@@ -32,7 +35,6 @@ public class CarrotMethodParser implements CarrotParser<MethodDeclaration> {
             SimpleName parameterName = parameter.getName();
 
             //TODO paramType paramName
-            System.out.println("paramType：" + parameterType.asString() + " paramName：" + parameterName);
         }
 
         NodeList<AnnotationExpr> annotations = type.getAnnotations();

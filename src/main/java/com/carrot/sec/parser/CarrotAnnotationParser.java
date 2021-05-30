@@ -9,6 +9,7 @@ import com.github.javaparser.ast.body.AnnotationDeclaration;
 import com.github.javaparser.ast.body.BodyDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
 
+@SuppressWarnings({"unchecked", "rawtypes"})
 @CarrotFind
 public class CarrotAnnotationParser implements CarrotParser<TypeDeclaration<?>> {
 

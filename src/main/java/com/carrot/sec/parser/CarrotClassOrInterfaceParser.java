@@ -7,11 +7,11 @@ import com.carrot.sec.interfaces.CarrotParser;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.*;
 import com.github.javaparser.ast.expr.AnnotationExpr;
-import com.github.javaparser.ast.expr.Name;
 import com.github.javaparser.ast.expr.SimpleName;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import com.github.javaparser.ast.type.TypeParameter;
 
+@SuppressWarnings({"unchecked", "rawtypes"})
 @CarrotFind
 public class CarrotClassOrInterfaceParser implements CarrotParser<TypeDeclaration<?>> {
 
@@ -31,10 +31,12 @@ public class CarrotClassOrInterfaceParser implements CarrotParser<TypeDeclaratio
         NodeList<AnnotationExpr> annotations = type.getAnnotations();
         if(annotations != null){
             for(AnnotationExpr annotationExpr : annotations){
-                Name annotationName = annotationExpr.getName();
 
-                //TODO
-                System.out.println("on class annotation：" + annotationName);
+                //TODO annotation in class
+                CarrotParser carrot = CarrotDispatchCenter.findCarrot(annotationExpr);
+                if(carrot != null){
+                    carrot.parser(annotationExpr,context);
+                }
 
             }
         }
@@ -72,9 +74,7 @@ public class CarrotClassOrInterfaceParser implements CarrotParser<TypeDeclaratio
         if(typeParameters != null){
             for(TypeParameter typeParameter : typeParameters){
                 SimpleName typeParameterName = typeParameter.getName();
-
-                //TODO
-                System.out.println("generic paradigm is ：" + typeParameterName);
+                //TODO class generic paradigm -> BeanFactory<T>
             }
         }
 

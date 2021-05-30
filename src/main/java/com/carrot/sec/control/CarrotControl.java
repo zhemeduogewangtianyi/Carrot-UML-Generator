@@ -32,9 +32,8 @@ public class CarrotControl {
         if(fileNames == null || fileNames.length == 0){
             return null;
         }
-        String name = null;
+
         for (File file : fileNames) {
-            name = file.getName();
             if(file.isDirectory()){
                 this.readClass(file.getAbsolutePath(),list);
             }
@@ -49,11 +48,8 @@ public class CarrotControl {
                     parseCode(in,context);
                     list.add(context);
 
-                    System.out.println();
-                    System.out.println();
                 }
             } catch (FileNotFoundException e) {
-                System.out.println(name);
                 e.printStackTrace();
             }
         }

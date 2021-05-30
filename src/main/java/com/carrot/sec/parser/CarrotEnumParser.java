@@ -11,6 +11,7 @@ import com.github.javaparser.ast.body.EnumDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.expr.SimpleName;
 
+@SuppressWarnings({"unchecked", "rawtypes"})
 @CarrotFind
 public class CarrotEnumParser implements CarrotParser<TypeDeclaration<?>> {
 
