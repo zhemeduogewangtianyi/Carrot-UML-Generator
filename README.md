@@ -4,13 +4,19 @@
 
 听最烈的歌，写最猛的代码~
 
-<p>
-<div class="embed-responsive embed-responsive-16by9">
-    <iframe class="embed-responsive-item" id="youtubeplayer" type="text/html" width="640" height="390"
-  src="http://dj.dj520.com/diffuucc/20210430/608b79af08a1a.m4a"
-  frameborder="0"/>
-</div>
-</p>
+<table>
+  <thead>
+    <tr>
+      <th>最近音乐</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="http://dj.dj520.com/diffuucc/20210430/608b79af08a1a.m4a"><img src="http://wwv.dj520.com/520img/500_500/50eb02925e98.jpg" width="100" height="60"></a></td>
+    </tr>
+    <tr></tr> <!-- hide gray row -->
+  </tbody>
+</table>
 
 
 
