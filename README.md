@@ -12,7 +12,7 @@
   </thead>
   <tbody>
     <tr>
-      <td><a href="http://dj.dj520.com/diffuucc/20210430/608b79af08a1a.m4a"><img src="http://wwv.dj520.com/520img/500_500/50eb02925e98.jpg" width="100" height="60"></a></td>
+      <td><a href="http://dj.dj520.com/diffuucc/20210430/608b79af08a1a.m4a"><img src="http://wwv.dj520.com/520img/500_500/50eb02925e98.jpg" width="100" height="64"></a></td>
     </tr>
     <tr></tr> <!-- hide gray row -->
   </tbody>
