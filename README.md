@@ -4,8 +4,9 @@
 
 听最烈的歌，写最猛的代码~
 
-<iframe src="http://dj.dj520.com/diffuucc/20210430/608b79af08a1a.m4a" />
-
+<audio id="audio" controls="" preload="none">
+  <source id="mp3" src="http://dj.dj520.com/diffuucc/20210430/608b79af08a1a.m4a">
+</audio>
 
 
 ## 1：使用方法：
